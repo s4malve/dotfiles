@@ -1,0 +1,149 @@
+#!/bin/bash
+
+log_info() {
+	echo -e "${BLUE}[INFO]${NC} $1"
+}
+
+log_success() {
+	echo -e "${GREEN}[SUCCESS]${NC} $1"
+}
+
+log_warning() {
+	echo -e "${YELLOW}[WARNING]${NC} $1"
+}
+
+log_error() {
+	local tag="[ERROR]"
+	local tag_length_padding=$((${#tag} + 1))
+	local pad=$(printf "%*s" $((tag_length_padding)) "")
+	local first_msg=$1
+	shift
+
+	echo "$tag_length_padding"
+
+	echo -e "${RED}$tag${NC} $first_msg"
+	for msg in "$@"; do
+		printf "%s%s\n" "$pad" "$msg"
+	done
+}
+
+core_install() {
+	sudo pacman -S --noconfirm --needed $@
+}
+
+external_install() {
+	paru -S --noconfirm --needed $@
+}
+
+create_module() {
+	export MODULES_FILES=("$DEPENDENCIES_FILE_NAME" "$CONFIG_FILE_NAME" "$INSTALL_FILE_NAME")
+	export EXEC_MODULES_FILES=("$CONFIG_FILE_NAME" "$INSTALL_FILE_NAME")
+
+	export MODULES_DIRS=("$CONFIG_DIR_NAME")
+
+	module_name=$1
+	module_dir="$MODULES_DIR/$module_name"
+	is_creating=true
+
+
+	if [[ ! "$module_name" ]]; then
+		log_error "You need to pass the name of your module." "Example:" "  $0 -m[--new-module] <module-name>"
+		exit 1
+	fi
+
+	if [[ ! -d  "$module_dir" ]]; then
+		mkdir "$module_dir"
+	else 
+		is_creating=false
+		log_info "Module $module_name already exists. The script will continue until the folder has a valid module structure."
+	fi
+	
+	for dir in "${MODULES_DIRS[@]}"; do 
+		dir_path="$module_dir/$dir" 
+		if [[ ! -d "$dir_path" ]]; then
+			mkdir "$dir_path"
+		else 
+			log_info "$BLUE[DIR]$NC '$dir/' already exists. Omiting"
+		fi
+	done
+
+	for filename in "${MODULES_FILES[@]}"; do 
+		filepath="$module_dir/$filename" 
+		if [[ ! -e "$filepath" ]]; then
+			touch "$module_dir/$filename"
+		else 
+			log_info "$BLUE[FILE]$NC '$filename' already exists. Omiting"
+		fi
+	done
+
+	for exec_file in "${EXEC_MODULES_FILES[@]}"; do 
+		exec_file_path="$module_dir/$exec_file" 
+		if [[ ! -x "$exec_file_path" ]]; then
+			chmod +x "$exec_file_path"
+		else 
+			log_info "$BLUE[CHMOD]$NC file '$exec_file' already executable. Omiting"
+		fi
+	done
+
+	module_action=$([[ $is_creating == true ]]  && echo "created" || echo "edited")
+	log_success "New module $module_name $module_action sucessfuly."
+}
+
+# Resolve module dependencies using topological sort
+resolve_dependencies() {
+	local modules=("$@")
+	local resolved=()
+	local temp_mark=()
+	local perm_mark=()
+
+	# Simple dependency resolution (you can make this more sophisticated)
+	# For now, just process in order and add dependencies first
+	local all_deps=()
+
+	for module in "${modules[@]}"; do
+		if [[ -f "$MODULES_DIR/$module/$DEPENDENCIES_FILE_NAME" ]]; then
+			while IFS= read -r dep; do
+				[[ -n "$dep" && "$dep" != \#* ]] && all_deps+=("$dep")
+				done < "$MODULES_DIR/$module/$DEPENDENCIES_FILE_NAME"
+		fi
+		all_deps+=("$module")
+	done
+
+	# Remove duplicates while preserving order
+	printf '%s\n' "${all_deps[@]}" | awk '!seen[$0]++'
+}
+
+run_module_script() {
+	local module="$1"
+	local script_type="$2"
+	local script_path="$MODULES_DIR/$module/${script_type}"
+
+	if [[ -f "$script_path" ]]; then
+		log_info "Running $script_type for $module"
+		if ! bash "$script_path"; then
+			log_error "Failed to run $script_type for $module"
+			exit 1
+		fi
+	else
+		log_warning "No $script_type script found for $module"
+	fi
+}
+
+# Link configuration files
+link_config() {
+	local source="$1"
+	local target="$2"
+
+	# Create target directory if it doesn't exist
+	mkdir -p "$(dirname "$target")"
+
+	# Backup existing file if it exists and isn't a symlink
+	if [[ -f "$target" && ! -L "$target" ]]; then
+		log_warning "Backing up existing $target to ${target}.backup"
+		mv "$target" "${target}.backup"
+	fi
+
+	# Create symlink
+	ln -sf "$source" "$target"
+	log_info "Linked $source -> $target"
+}

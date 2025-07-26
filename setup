@@ -1,0 +1,86 @@
+#!/bin/bash
+
+set -e
+
+export DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+source "$DOTFILES_DIR/lib/consts"
+source "$DOTFILES_DIR/lib/utils"
+
+export MODULES_DIR="$DOTFILES_DIR/modules"
+
+# Parse command line arguments
+INSTALL_ONLY=false
+CONFIGURE_ONLY=false
+ALL_MODULES=false
+SELECTED_MODULES=()
+
+usage() {
+	echo "Usage: $0 [OPTIONS] [MODULES...]"
+	echo "Options:"
+	echo "  -m, --new-module    Creates a new module"
+	echo "  -i, --install-only    Only install packages"
+	echo "  -c, --configure-only  Only configure dotfiles"
+	echo "  -a, --all            Install and configure all modules"
+	echo "  -h, --help           Show this help"
+	echo ""
+	echo "Examples:"
+	echo "  $0 -a                # Install and configure everything"
+	echo "  $0 -i git vim        # Only install git and vim"
+	echo "  $0 -c zsh tmux       # Only configure zsh and tmux"
+	echo "  $0 -n nvim           # Creates a new folder in $MODULES_DIR"
+	echo "                       # With the respective file structure: "
+}
+
+while [[ $# -gt 0 ]]; do
+	case $1 in
+		-i|--install-only)
+			INSTALL_ONLY=true
+			shift
+			;;
+		-c|--configure-only)
+			CONFIGURE_ONLY=true
+			shift
+			;;
+		-a|--all)
+			ALL_MODULES=true
+			shift
+			;;
+		-h|--help)
+			usage
+			exit 0
+			;;
+		-m|--new-module)
+			create_module $2
+			exit 0
+			;;
+		*)
+			SELECTED_MODULES+=("$1")
+			shift
+			;;
+	esac
+done
+
+# Determine which modules to process
+if $ALL_MODULES; then
+	MODULES=($(ls "$MODULES_DIR"))
+else
+	MODULES=("${SELECTED_MODULES[@]}")
+fi
+
+# Resolve dependencies and process modules
+RESOLVED_MODULES=$(resolve_dependencies "${MODULES[@]}")
+
+for module in $RESOLVED_MODULES; do
+	log_info "Processing module: $module"
+
+	if ! $CONFIGURE_ONLY; then
+		run_module_script "$module" "$INSTALL_FILE_NAME"
+	fi
+
+	if ! $INSTALL_ONLY; then
+		run_module_script "$module" "$CONFIG_FILE_NAME"
+	fi
+done
+
+log_success "Setup complete!"
