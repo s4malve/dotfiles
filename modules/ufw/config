@@ -1,0 +1,14 @@
+#!/usr/bin/bash
+
+source "$DOTFILES_DIR/lib/utils"
+
+sudo systemctl enable --now ufw.service
+
+sudo ufw default deny
+sudo ufw allow from 192.168.0.0/24
+sudo ufw allow Deluge
+sudo ufw limit ssh
+
+
+sudo ufw status verbose
+
