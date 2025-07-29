@@ -1,1 +1,3 @@
 #!/usr/bin/bash
+
+source "$DOTFILES_DIR/lib/utils"
