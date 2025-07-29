@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+
+source "$DOTFILES_DIR/lib/utils"
+
+core_install bluez bluez-utils
+
+sudo rfkill unblock bluetooth || { log_error "Failed to unblock Bluetooth." >&2; return 1; }
+sudo systemctl enable  --now bluetooth.service || { log_error "Failed to enable Bluetooth service." >&2; return 1; }
+sudo bluetoothctl power on
