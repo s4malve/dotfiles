@@ -12,6 +12,14 @@ log_warning() {
 	echo -e "${YELLOW}[WARNING]${NC} $1"
 }
 
+exists() {
+        if command -v -- "$@" >/dev/null 2>&1; then
+		return 0
+        else
+		return 1
+        fi
+}
+
 log_error() {
 	local tag="[ERROR]"
 	local tag_length_padding=$((${#tag} + 1))
