@@ -1,0 +1,22 @@
+#!/usr/bin/bash
+
+source "$DOTFILES_DIR/lib/utils"
+
+local temp_dir
+temp_dir=$(mktemp -d) || { log_error "Failed to create temporary directory." >&2; return 1; }
+
+if ! git clone https://aur.archlinux.org/paru.git "$temp_dir"; then
+	log_error "Failed to clone paru repository." >&2
+	rm -rf "$temp_dir"
+	return 1
+fi
+
+(
+	cd "$temp_dir" || { log_error "Failed to change directory to $temp_dir." >&2; return 1; }
+	if ! makepkg -si --noconfirm; then
+		log_error "Failed to build and install paru." >&2
+		return 1
+	fi
+)
+
+rm -rf "$temp_dir"
