@@ -1,0 +1,12 @@
+#!/usr/bin/bash
+
+source "$DOTFILES_DIR/lib/utils"
+MAIN_MODULE_DIR="$DOTFILES_DIR/modules/scripts"
+CONFIG_DIR="$MAIN_MODULE_DIR/modules"
+DEST_PATH="$HOME/.scripts"
+
+log_info "Configuring scripts"
+
+link_config "$CONFIG_DIR/tmux-sessionizer" "$DEST_PATH/tmux-sessionizer"
+
+log_success "Scripts configured successfully"
