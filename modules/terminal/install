@@ -1,0 +1,10 @@
+#!/usr/bin/bash
+
+source "$DOTFILES_DIR/lib/utils"
+
+log_info "Installing terminal"
+
+core_install ghostty fzf
+
+log_info "Terminal installed successfully."
+
