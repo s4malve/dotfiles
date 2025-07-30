@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+
+source "$DOTFILES_DIR/lib/utils"
+
+log_info "Installing XDG user dirs"
+
+core_install xdg-user-dirs
+
+log_success "XDG user dirs installed successfully"
