@@ -2,4 +2,8 @@
 
 source "$DOTFILES_DIR/lib/utils"
 
+log_info "Installing uwsm"
+
 core_install uwsm libnewt
+
+log_success "Uwsm installed successfully"

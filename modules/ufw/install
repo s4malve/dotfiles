@@ -2,6 +2,9 @@
 
 source "$DOTFILES_DIR/lib/utils"
 
+log_info "Installing ufw"
+
 core_install ufw
 
-systemctl enable --now ufw.service
+log_success "Ufw installed successfully"
+

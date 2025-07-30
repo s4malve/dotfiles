@@ -7,6 +7,8 @@ if exists paru --version; then
 	exit 0
 fi
 
+log_info "Installing paru"
+
 local temp_dir
 temp_dir=$(mktemp -d) || { log_error "Failed to create temporary directory." >&2; return 1; }
 
@@ -25,3 +27,4 @@ fi
 )
 
 rm -rf "$temp_dir"
+log_success "Paru installed successfully"

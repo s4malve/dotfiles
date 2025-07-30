@@ -2,9 +2,9 @@
 
 source "$DOTFILES_DIR/lib/utils"
 
-log_info "Installing terminal"
+log_info "Installing ghossty"
 
 core_install ghostty fzf
 
-log_info "Terminal installed successfully."
+log_info "Ghostty installed successfully."
 

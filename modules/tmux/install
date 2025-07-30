@@ -2,4 +2,8 @@
 
 source "$DOTFILES_DIR/lib/utils"
 
+log_info "Installing tmux"
+
 core_install tmux
+
+log_success "Tmux installed successfully"

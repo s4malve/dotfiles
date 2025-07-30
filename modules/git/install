@@ -2,4 +2,8 @@
 
 source "$DOTFILES_DIR/lib/utils"
 
+log_info "Installing git packages"
+
 core_install git
+
+log_success "Git installed successfully"

@@ -1,3 +1,8 @@
 #!/usr/bin/bash
 
 source "$DOTFILES_DIR/lib/utils"
+
+log_info "Configuring ghostty"
+
+log_success "Ghostty configured successfully"
+

@@ -2,7 +2,11 @@
 
 source "$DOTFILES_DIR/lib/utils"
 
+log_info "Installing base packages"
+
 core_install base-devel xdg-desktop-portal bc tldr unzip man-pages man-db
 
 sudo systemctl daemon-reload || log_error "Daemon reload failed, continuing..."
+
+log_success "Base packages installed successfully"
 

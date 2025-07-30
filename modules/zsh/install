@@ -2,6 +2,8 @@
 
 source "$DOTFILES_DIR/lib/utils"
 
+log_info "Installing zsh"
+
 core_install zsh
 
-log_success "Shell installed successfully."
+log_success "Zsh installed successfully"

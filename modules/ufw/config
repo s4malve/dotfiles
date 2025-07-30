@@ -2,6 +2,8 @@
 
 source "$DOTFILES_DIR/lib/utils"
 
+log_info "Configuring ufw"
+
 sudo systemctl enable --now ufw.service
 
 sudo ufw default deny
@@ -9,6 +11,6 @@ sudo ufw allow from 192.168.0.0/24
 sudo ufw allow Deluge
 sudo ufw limit ssh
 
-
 sudo ufw status verbose
 
+log_success "Ufw configured successfully"
