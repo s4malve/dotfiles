@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+
+source "$DOTFILES_DIR/lib/utils"
+
+log_info "Installing vlc"
+
+core_install vlc vlc-plugins-all
+
+log_success "Vlc installed successfully"
