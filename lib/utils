@@ -125,3 +125,27 @@ link_config() {
 	ln -sf "$source" "$target"
 	log_info "Linked $source -> $target"
 }
+
+prompt_for_yes_no() {
+    local prompt_msg="$1"
+    local default_choice="${2:-no}" # Default to 'no' if not provided
+    local choice_lower
+
+    while true; do
+        read -rp "$prompt_msg ($default_choice)? " choice
+        choice_lower=$(echo "$choice" | tr '[:upper:]' '[:lower:]') # Convert to lowercase
+
+        case "$choice_lower" in
+            y|yes) return 0 ;; # Success (yes)
+            n|no) return 1 ;;  # Failure (no)
+            "")
+                if [[ "$default_choice" == "yes" ]]; then
+                    return 0
+                else
+                    return 1
+                fi
+                ;;
+            *) echo "Invalid option. Please enter 'yes' or 'no'." ;;
+        esac
+    done
+}
