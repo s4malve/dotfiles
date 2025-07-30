@@ -7,7 +7,6 @@ log_info "Installing hyprland packages"
 core_install \
 	xdg-desktop-portal-hyprland hyprpolkitagent qt5-wayland qt6-wayland \
 	wl-clipboard brightnessctl nwg-look hyprland ffmpeg \
-	android-file-transfer cliphist \
-	hyprpaper
+	android-file-transfer cliphist
 
 log_success "Hyprland installed successfully"
