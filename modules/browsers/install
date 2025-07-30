@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+
+source "$DOTFILES_DIR/lib/utils"
+
+log_info "Installing browser"
+
+external_install zen-browser brave-beta-bin
+
+log_success "Browser installed successfully"
