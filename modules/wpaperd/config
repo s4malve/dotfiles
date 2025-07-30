@@ -1,0 +1,12 @@
+#!/usr/bin/bash
+
+source "$DOTFILES_DIR/lib/utils"
+MAIN_MODULE_DIR="$DOTFILES_DIR/modules/wpaperd"
+CONFIG_DIR="$MAIN_MODULE_DIR/modules"
+DEST_PATH="$HOME/.config/wpaperd"
+
+log_info "Configuring wpaperd"
+
+link_config "$CONFIG_DIR/config.toml" "$DEST_PATH/config.toml"
+
+log_success "Wpaperd configured successfully"

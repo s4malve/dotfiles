@@ -1,0 +1,15 @@
+#!/usr/bin/bash
+
+source "$DOTFILES_DIR/lib/utils"
+#MAIN_MODULE_DIR="$DOTFILES_DIR/modules/X"
+#CONFIG_DIR="$MAIN_MODULE_DIR/modules"
+#DEST_PATH="$HOME/X"
+wallpaper_folder="$HOME/.wallpapers"
+
+log_info "Configuring Wallpapers"
+
+if [[ ! -d "$wallpaper_folder" ]]; then
+    git clone git@github.com:s4malve/.wallpapers.git "$wallpaper_folder"
+fi
+
+log_success "Wallpapers configured successfully"
