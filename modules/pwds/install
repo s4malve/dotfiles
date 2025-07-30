@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+
+source "$DOTFILES_DIR/lib/utils"
+
+log_info "Installing pass"
+
+core_install pass
+
+log_success "Pass installed successfully"

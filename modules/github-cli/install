@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+
+source "$DOTFILES_DIR/lib/utils"
+
+log_info "Installing Github CLI"
+
+core_install github-cli
+
+log_success "Github CLI installed successfully"

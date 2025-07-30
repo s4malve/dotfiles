@@ -1,0 +1,19 @@
+#!/usr/bin/bash
+
+source "$DOTFILES_DIR/lib/utils"
+MAIN_MODULE_DIR="$DOTFILES_DIR/modules/ssh"
+CONFIG_DIR="$MAIN_MODULE_DIR/modules"
+DEST_PATH="$HOME/.ssh"
+key_path="$DEST_PATH/id_ed25519"
+
+log_info "Configuring shh"
+
+echo "Enter your email for the ssh key"
+read -r ssh_email
+
+ssh-keygen -t ed25519 -C "$ssh_email" -f "$key_path" -N ""
+
+eval "$(ssh-agent -s)" || { log_error "Failed to start SSH agent." >&2; return 1; }
+ssh-add "$key_path" || { log_error "Failed to add SSH key to agent." >&2; return 1; }
+
+log_success "Ssh configured successfully"

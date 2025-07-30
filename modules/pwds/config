@@ -1,0 +1,21 @@
+#!/usr/bin/bash
+
+source "$DOTFILES_DIR/lib/utils"
+
+MAIN_MODULE_DIR="$DOTFILES_DIR/modules/pwds"
+CONFIG_DIR="$MAIN_MODULE_DIR/modules"
+DEST_PATH="$HOME/.password-store"
+pwd_repo="git@github.com:s4malve/pwd.git"
+
+log_info "Configuring pwds"
+
+if [[ ! -d "$DEST_PATH" ]]; then
+    log_info "Cloning password store from GitHub..."
+    git clone "$pwd_repo" "$DEST_PATH" || { log_error "Failed to clone repo." >&2; return 1; }
+    log_info "Passwords cloned successfully to $(basename "$DEST_PATH")"
+else
+    log_info "Password store already exists at $(basename "$DEST_PATH"). Skipping clone."
+fi
+
+
+log_success "Pwds configured successfully"

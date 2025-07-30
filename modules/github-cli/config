@@ -1,0 +1,33 @@
+#!/usr/bin/bash
+
+source "$DOTFILES_DIR/lib/utils"
+MAIN_MODULE_DIR="$DOTFILES_DIR/modules/github-cli"
+CONFIG_DIR="$MAIN_MODULE_DIR/modules"
+#DEST_PATH="$HOME/"
+git_username=$(git config get user.name)
+key_path="$DEST_PATH/id_ed25519"
+
+log_info "Configuring Github CLI"
+
+if ! gh auth status &>/dev/null || ! gh auth status | grep -q "Logged in to github.com account $git_username"; then
+    log_info "Logging into GitHub CLI..."
+     gh auth login || { log_error "GitHub CLI login failed." >&2; return 1; }
+else
+    log_info "Already logged in to GitHub."
+fi
+
+if ! gh auth status | grep -q "admin:public_key"; then
+    log_info "Refreshing GitHub CLI permissions for public key management..."
+
+     gh auth refresh -h github.com -s admin:public_key || { log_error "Failed to refresh GitHub CLI permissions." >&2; return 1; }
+fi
+
+if [[ ! -e "$key_path.pub" ]]; then
+    log_error "Public SSH key not found at $DEFAULT_SSH_FILE.pub. Cannot add to GitHub." >&2
+    return 1
+fi
+
+log_info "Adding SSH public key to GitHub..."
+gh ssh-key add "$key_path.pub" || { log_error "Failed to add SSH key to GitHub. It might already exist." >&2; return 1; }
+
+log_success "Github CLI configured successfully"
