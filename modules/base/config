@@ -1,0 +1,22 @@
+#/usr/bin/bash
+
+
+source "$DOTFILES_DIR/lib/utils"
+
+log_info "Configuring base system"
+
+battery_dir=/sys/class/power_supply/BAT0
+curr_charge_limit=$(cat "$battery_dir/charge_control_end_threshold")
+charge_limit=60
+
+log_info "Setting '$charge_limit' as new battery capacity to enhance battery life"
+if (( "$curr_charge_limit" == "$charge_limit" ));then
+    log_info "Battery capacity is already set, Omitting..."
+    exit 0
+else
+    sudo sh -c "echo $charge_limit  > $battery_dir/charge_control_end_threshold" && log_success "New battery capacity set"
+fi
+
+
+log_success "Base system configured successfully"
+
