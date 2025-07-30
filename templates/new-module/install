@@ -4,4 +4,6 @@ source "$DOTFILES_DIR/lib/utils"
 
 log_info "Installing X"
 
+core_install X
+
 log_success "X installed successfully"

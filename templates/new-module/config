@@ -7,5 +7,6 @@ DEST_PATH="$HOME/X"
 
 log_info "Configuring X"
 
+link_config from to
 
 log_success "X configured successfully"
