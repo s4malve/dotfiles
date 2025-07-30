@@ -116,7 +116,7 @@ link_config() {
 	mkdir -p "$(dirname "$target")"
 
 	# Backup existing file if it exists and isn't a symlink
-	if [[ -f "$target" && ! -L "$target" ]]; then
+	if [[ -e "$target" && ! -L "$target" ]]; then
 		log_warning "Backing up existing $target to ${target}.backup"
 		mv "$target" "${target}.backup"
 	fi
