@@ -1,0 +1,13 @@
+#!/usr/bin/bash
+
+source "$DOTFILES_DIR/lib/utils"
+
+log_info "Configuring hyprland"
+
+MAIN_MODULE_DIR="$DOTFILES_DIR/modules/hyprland"
+CONFIG_DIR="$MAIN_MODULE_DIR/modules"
+DEST_PATH="$HOME/.config/hypr"
+
+link_config  "$CONFIG_DIR/hyprland.conf" "$DEST_PATH/hyprland.conf"
+
+log_success "Hyprland configured successfully"

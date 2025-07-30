@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+
+source "$DOTFILES_DIR/lib/utils"
+
+core_install \
+	xdg-desktop-portal-hyprland hyprpolkitagent qt5-wayland qt6-wayland \
+	wl-clipboard brightnessctl nwg-look hyprland ffmpeg \
+	android-file-transfer cliphist \
+	hyprpaper
