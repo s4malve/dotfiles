@@ -1,3 +1,11 @@
 #!/usr/bin/bash
 
 source "$DOTFILES_DIR/lib/utils"
+MAIN_MODULE_DIR="$DOTFILES_DIR/modules/X"
+CONFIG_DIR="$MAIN_MODULE_DIR/modules"
+DEST_PATH="$HOME/X"
+
+log_info "Configuring X"
+
+
+log_success "X configured successfully"

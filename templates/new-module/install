@@ -1,3 +1,7 @@
 #!/usr/bin/bash
 
 source "$DOTFILES_DIR/lib/utils"
+
+log_info "Installing X"
+
+log_success "X installed successfully"
