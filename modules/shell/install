@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+
+source "$DOTFILES_DIR/lib/utils"
+
+core_install zsh
+
+log_success "Shell installed successfully."

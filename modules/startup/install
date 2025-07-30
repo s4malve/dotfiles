@@ -1,0 +1,5 @@
+#!/usr/bin/bash
+
+source "$DOTFILES_DIR/lib/utils"
+
+core_install uwsm libnewt

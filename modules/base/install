@@ -2,7 +2,7 @@
 
 source "$DOTFILES_DIR/lib/utils"
 
-core_install base-devel xdg-desktop-portal bc tldr unzip
+core_install base-devel xdg-desktop-portal bc tldr unzip man-pages man-db
 
 sudo systemctl daemon-reload || log_error "Daemon reload failed, continuing..."
 

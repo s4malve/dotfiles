@@ -1,0 +1,14 @@
+#!/usr/bin/bash
+
+source "$DOTFILES_DIR/lib/utils"
+
+log_info "Configuring tmux"
+
+MAIN_MODULE_DIR="$DOTFILES_DIR/modules/tmux"
+CONFIG_DIR="$MAIN_MODULE_DIR/modules"
+DEST_PATH="$HOME/.config/tmux"
+
+link_config  "$CONFIG_DIR/tmux.conf" "$DEST_PATH/tmux.conf"
+
+log_success "Tmux configured successfully"
+

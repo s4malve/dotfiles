@@ -44,27 +44,27 @@ external_install() {
 }
 
 create_module() {
-	module_name=$1
-	module_dir="$MODULES_DIR/$module_name"
 	template_dir="$DOTFILES_DIR/templates/new-module"
+	modules=("$@")
 
-	if [[ ! "$module_name" ]]; then
-		log_error "You need to pass the name of your module." "Example:" "  $0 -m[--new-module] <module-name>"
-		exit 1
-	fi
+	for module in "${modules[@]}"; do 
+		log_info "'$module' module creation starts."
+		module_dir="$MODULES_DIR/$module"
+		mkdir -p "$module_dir"
 
-	mkdir -p "$module_dir"
-	
-	for template_path in "$template_dir"/*; do 
-		filename="${template_path##*/}"
-		path="$module_dir/$filename"
+		for template_path in "$template_dir"/*; do 
+			filename="${template_path##*/}"
+			path="$module_dir/$filename"
 
-		if [[ ! -e "$path" ]]; then
-			cp -r "$template_path" "$path"
-		fi
+			if [[ ! -e "$path" ]]; then
+				cp -r "$template_path" "$path"
+			fi
+		done
+
+		log_success "'$module' module creation finish."
 	done
 
-	log_success "New module $module_name $module_action sucessfuly."
+	log_success "Module creation finished. ${#modules[@]} module(s) created."
 }
 
 # Resolve module dependencies using topological sort

@@ -1,0 +1,19 @@
+#!/usr/bin/bash
+
+source "$DOTFILES_DIR/lib/utils"
+
+log_info "Configuring shell"
+
+MAIN_MODULE_DIR="$DOTFILES_DIR/modules/shell"
+CONFIG_DIR="$MAIN_MODULE_DIR/modules"
+DEST_PATH="$HOME"
+
+chsh -s /usr/bin/zsh 
+
+link_config "$CONFIG_DIR/.zshrc" "$DEST_PATH/.zshrc"
+link_config "$CONFIG_DIR/.zprofile" "$DEST_PATH/.zprofile"
+
+log_success "Shell configured successfully"
+
+exec zsh
+
