@@ -1,1 +1,2 @@
-app-launcher
+uwsm
+wofi
