@@ -1,2 +1,4 @@
+hyprland
+scripts
 starship
 terminal
