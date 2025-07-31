@@ -1,0 +1,17 @@
+#!/usr/bin/bash
+
+source "$DOTFILES_DIR/lib/utils"
+MAIN_MODULE_DIR="$DOTFILES_DIR/modules/fastfetch"
+CONFIG_DIR="$MAIN_MODULE_DIR/modules"
+DEST_PATH="$HOME/.config/fastfetch"
+
+log_info "Configuring fastfetch"
+link_config "$CONFIG_DIR/config.jsonc" "$DEST_PATH/config.jsonc"
+# CONFIG_DIR
+# DEST_PATH
+
+for ascii_img in "$CONFIG_DIR"/logos/*; do
+    link_config "$ascii_img" "$DEST_PATH/logos/$(basename "$ascii_img")"
+done
+
+log_success "Fastfetch configured successfully"

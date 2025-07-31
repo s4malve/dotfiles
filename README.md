@@ -1,4 +1,8 @@
 # Things left
+- [ ] 
+- [ ] startship
+- [X] fasfetch
+- [ ] Change app launcher
 - [X] git
 - [X] shell
 - [X] startup
@@ -6,5 +10,3 @@
 - [X] ufw
 - [X] neovim
 - [X] Add start and ending loggin for each module
-- [ ] Change app launcher
-- [ ] 
