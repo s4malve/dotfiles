@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+
+source "$DOTFILES_DIR/lib/utils"
+
+log_info "Installing starship"
+
+core_install starship
+
+log_success "Starship installed successfully"

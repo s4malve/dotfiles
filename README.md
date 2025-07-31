@@ -1,6 +1,6 @@
 # Things left
 - [ ] 
-- [ ] startship
+- [X] starship
 - [X] fasfetch
 - [ ] Change app launcher
 - [X] git
