@@ -2,7 +2,13 @@
 
 source "$DOTFILES_DIR/lib/utils"
 
+MAIN_MODULE_DIR="$DOTFILES_DIR/modules/ghostty"
+CONFIG_DIR="$MAIN_MODULE_DIR/modules"
+DEST_PATH="$HOME/.config/ghostty"
+
 log_info "Configuring ghostty"
+
+link_config "$CONFIG_DIR/config" "$DEST_PATH/config"
 
 log_success "Ghostty configured successfully"
 

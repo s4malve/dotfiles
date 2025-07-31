@@ -8,7 +8,7 @@ MAIN_MODULE_DIR="$DOTFILES_DIR/modules/neovim"
 CONFIG_DIR="$MAIN_MODULE_DIR/modules"
 DEST_PATH="$HOME/.config/nvim"
 
-link_config  "$CONFIG_DIR/init.lua" "$DEST_PATH/init.lua"
-link_config  "$CONFIG_DIR/lua" "$DEST_PATH/lua"
+link_config "$CONFIG_DIR/init.lua" "$DEST_PATH/init.lua"
+link_config "$CONFIG_DIR/lua/keymaps.lua" "$DEST_PATH/lua/keymaps.lua"
 
 log_success "Neovim configured successfully"

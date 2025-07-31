@@ -1,0 +1,4 @@
+background = 282c34
+background-opacity = 0.9
+keybind = ctrl+enter=ignore
+# background = ffff
