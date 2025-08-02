@@ -4,6 +4,6 @@ source "$DOTFILES_DIR/lib/utils"
 
 log_info "Installing neovim"
 
-core_install neovim
+core_install neovim luarocks
 
 log_success "Neovim installed successfully"

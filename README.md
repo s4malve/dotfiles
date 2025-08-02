@@ -1,5 +1,16 @@
 # Things left
 - [ ] 
+- [X] neovim
+    - [X] Setup lazy nvim
+    - [X] Oil
+    - [ ] telescope
+    - [ ] LSP
+    - [ ] Treesitter
+    - [ ] Autocomplete
+    - [ ] code formatting
+    - [ ] per file type config
+    - [ ] Quickfix list (with diagnostics)
+    - [ ] Use only nvim to move/split windows and open terminal with :term
 - [X] starship
 - [X] fasfetch
 - [ ] Change app launcher
@@ -8,5 +19,4 @@
 - [X] startup
 - [X] tmux
 - [X] ufw
-- [X] neovim
 - [X] Add start and ending loggin for each module
