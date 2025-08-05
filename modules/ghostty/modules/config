@@ -1,5 +1,7 @@
-background = 282c34
+background = 000000
 background-opacity = 0.9
-keybind = ctrl+enter=ignore
 confirm-close-surface = false
 # background = ffff
+
+keybind = ctrl+enter=ignore
+keybind = unconsumed:ctrl+a=reload_config
