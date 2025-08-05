@@ -1,4 +1,6 @@
 hyprland
 scripts
 starship
-terminal
+ghostty
+golang
+rust
