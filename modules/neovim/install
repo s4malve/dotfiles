@@ -4,6 +4,9 @@ source "$DOTFILES_DIR/lib/utils"
 
 log_info "Installing neovim"
 
-core_install neovim luarocks
+core_install neovim luarocks git lua-language-server
+
+cargo install emmylua_ls
+go install golang.org/x/tools/gopls@latest
 
 log_success "Neovim installed successfully"

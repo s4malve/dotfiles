@@ -4,8 +4,12 @@ return {
 	---@type oil.SetupOpts
 	opts = function()
 		vim.keymap.set("n", "<leader>pv", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+
 		return {
 			default_file_explorer = true,
+			view_options = {
+				show_hidden = true,
+			}
 		}
 	end,
 	-- Optional dependencies
