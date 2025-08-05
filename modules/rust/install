@@ -1,0 +1,14 @@
+#!/usr/bin/bash
+
+source "$DOTFILES_DIR/lib/utils"
+
+if command -v -- cargo version >/dev/null; then
+	log_info "Rust already installed"
+	exit 0
+fi
+
+log_info "Installing rust"
+
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+log_success "Rust installed successfully"
