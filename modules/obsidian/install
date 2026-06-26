@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+
+source "$DOTFILES_DIR/lib/utils"
+
+log_info "Installing obsidian"
+
+core_install obsidian
+
+log_success "Obsidian installed successfully"

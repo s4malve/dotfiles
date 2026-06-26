@@ -1,0 +1,73 @@
+(defcfg
+  process-unmapped-keys yes
+  )
+
+(defsrc
+  lmeta
+  lctrl
+  lshift
+  lalt
+  caps
+  a
+  s
+  d
+  f
+
+  j
+  k	
+  l	
+  scln
+  rctrl
+  rshift
+  ralt
+  rmeta
+  )
+
+(defvar
+  tap-time 100
+  hold-time 200
+  )
+
+(defalias
+  lshift-mod (tap-hold $tap-time $hold-time XX XX)
+  lctrl-mod (tap-hold $tap-time $hold-time XX XX)
+  lmeta-mod (tap-hold $tap-time $hold-time XX XX)
+  lalt-mod (tap-hold $tap-time $hold-time XX XX)
+
+  caps-mod (tap-hold $tap-time $hold-time esc XX)
+  a-mod (tap-hold $tap-time $hold-time a lctrl)
+  s-mod (tap-hold $tap-time $hold-time s lshift)
+  d-mod (tap-hold $tap-time $hold-time d lalt)
+  f-mod (tap-hold $tap-time $hold-time f lmeta)
+
+  j-mod (tap-hold $tap-time $hold-time j rmeta)
+  k-mod (tap-hold $tap-time $hold-time k ralt)
+  l-mod (tap-hold $tap-time $hold-time l rshift)
+  scln-mod (tap-hold $tap-time $hold-time scln rctrl)
+
+  rshift-mod (tap-hold $tap-time $hold-time XX XX)
+  rctrl-mod (tap-hold $tap-time $hold-time XX XX)
+  rmeta-mod (tap-hold $tap-time $hold-time XX XX)
+  ralt-mod (tap-hold $tap-time $hold-time XX XX)
+  )
+
+(deflayer base
+		  @rshift-mod
+		  @rctrl-mod 
+		  @rmeta-mod 
+		  @ralt-mod
+		  @caps-mod
+		  @a-mod
+		  @s-mod
+		  @d-mod
+		  @f-mod
+
+		  @j-mod
+		  @k-mod
+		  @l-mod
+		  @scln-mod
+		  @rshift-mod
+		  @rctrl-mod 
+		  @rmeta-mod 
+		  @ralt-mod
+		  )

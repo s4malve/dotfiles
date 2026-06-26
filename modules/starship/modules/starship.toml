@@ -23,16 +23,14 @@
 # $time\
 # [ ](fg:#33658A)\
 # """
-format = """  [](#3B4252)\
-$username\
-[](bg:#434C5E fg:#3B4252)\
+format = """  [](#9A348E)\
+[](bg:#DA627D fg:#9A348E)\
 $directory\
-[](fg:#434C5E bg:#4C566A)\
+[](fg:#DA627D bg:#FCA17D)\
 $git_branch\
 $git_status\
-[](fg:#4C566A bg:#33658A)\
-[ ](bg:#33658A)\
-[ ](fg:#33658A)\
+[](fg:#FCA17D bg:#86BBD8)\
+[ ](fg:#86BBD8)\
 """
 command_timeout = 5000
 # Disable the blank line at the start of the prompt
@@ -46,7 +44,7 @@ style_root = "bg:#3B4252"
 format = '[$user ]($style)'
 
 [directory]
-style = "bg:#434C5E"
+style = "bg:#DA627D"
 format = "[ $path ]($style)"
 truncation_length = 3
 truncation_symbol = "…/"
@@ -86,11 +84,11 @@ format = '[ $symbol ($version) ]($style)'
 
 [git_branch]
 symbol = ""
-style = "bg:#4C566A"
+style = "bg:#FCA17D"
 format = '[ $symbol $branch ]($style)'
 
 [git_status]
-style = "bg:#4C566A"
+style = "bg:#FCA17D"
 format = '[$all_status$ahead_behind ]($style)'
 
 [golang]

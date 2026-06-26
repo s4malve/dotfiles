@@ -1,0 +1,17 @@
+#!/usr/bin/bash
+
+source "$DOTFILES_DIR/lib/utils"
+
+log_info "Installing docker"
+
+core_install wget docker
+
+if [[ ! -e /opt/docker-desktop ]]; then 
+	wget https://desktop.docker.com/linux/main/amd64/201307/docker-desktop-x86_64.pkg.tar.zst
+	sudo pacman -U ./docker-desktop-x86_64.pkg.tar.zst
+	rm docker-desktop-x86_64.pkg.tar.zst
+	sudo usermod -aG docker $USER
+	newgrp docker
+fi
+
+log_success "Docker installed successfully"

@@ -1,0 +1,16 @@
+#!/usr/bin/bash
+
+source "$DOTFILES_DIR/lib/utils"
+
+log_info "Installing nodejs"
+
+core_install nodejs
+
+if ! exists pnpm; then
+	mkdir -p "$HOME/.npm-global"
+	npm config set prefix "$HOME/.npm-global"
+	npm install -g pnpm@latest-10
+	pnpm self-update
+fi
+
+log_success "Nodejs installed successfully"

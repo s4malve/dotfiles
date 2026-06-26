@@ -9,5 +9,6 @@ CONFIG_DIR="$MAIN_MODULE_DIR/modules"
 DEST_PATH="$HOME/.config/hypr"
 
 link_config  "$CONFIG_DIR/hyprland.conf" "$DEST_PATH/hyprland.conf"
+link_config  "$CONFIG_DIR/hyprsunset.conf" "$DEST_PATH/hyprsunset.conf"
 
 log_success "Hyprland configured successfully"

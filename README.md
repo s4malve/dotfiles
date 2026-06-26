@@ -4,13 +4,13 @@
     - [X] Setup lazy nvim
     - [X] Oil
     - [ ] telescope
-    - [ ] LSP
-    - [ ] Treesitter
-    - [ ] Autocomplete
-    - [ ] code formatting
+    - [X] LSP
+    - [X] Treesitter
+    - [X] Autocomplete
+    - [X] code formatting
     - [ ] per file type config
     - [ ] Quickfix list (with diagnostics)
-    - [ ] Use only nvim to move/split windows and open terminal with :term
+    - ~~Use only nvim to move/split windows and open terminal with :term~~
 - [X] starship
 - [X] fasfetch
 - [ ] Change app launcher

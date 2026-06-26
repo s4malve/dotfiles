@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+
+source "$DOTFILES_DIR/lib/utils"
+
+log_info "Installing kanata"
+
+external_install kanata
+
+log_success "Kanata installed successfully"

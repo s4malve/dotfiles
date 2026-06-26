@@ -5,7 +5,9 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
 source "${ZINIT_HOME}/zinit.zsh"
 
-export PATH="$PATH:$HOME/.scripts/:/USR/local/go/bin:$HOME/.cargo/bin"
+export PNPM_HOME="$HOME/.npm-global/bin"
+export EDITOR="nvim"
+export PATH="$PATH:$HOME/.scripts/:/usr/local/go/bin:$HOME/.cargo/bin:$HOME/go/bin/:$PNPM_HOME"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
@@ -30,15 +32,10 @@ setopt hist_find_no_dups
 setopt hist_save_no_dups
 setopt sharehistory
 
-# Plugins
-zinit light zsh-users/zsh-autosuggestions
-zinit light zdharma-continuum/fast-syntax-highlighting
-zinit light zsh-users/zsh-completions
-zinit light Aloxaf/fzf-tab
-
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' menu no
+#zstyle ':fzf-tab:*' fzf-command ftb-tmux-popup
 
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/s4malve/.zshrc'
@@ -47,9 +44,16 @@ compinit
 zinit cdreplay -q
 # End of lines added by compinstall
 
+# Plugins
+zinit light zsh-users/zsh-autosuggestions
+zinit light zdharma-continuum/fast-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit light Aloxaf/fzf-tab
 
 # Keybindings
 bindkey -v
+#bindkey '^I' enable-fzf-tab
+bindkey '^ ' autosuggest-accept
 bindkey ^p history-search-backward
 bindkey ^n history-search-forward
 bindkey -s ^f "tmux-sessionizer\n"

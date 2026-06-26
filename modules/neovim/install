@@ -6,7 +6,9 @@ log_info "Installing neovim"
 
 core_install neovim luarocks git lua-language-server
 
-cargo install emmylua_ls
-go install golang.org/x/tools/gopls@latest
+if ! exists gopls; then
+	go install golang.org/x/tools/gopls@latest
+fi
+pnpm i -g oxlint
 
 log_success "Neovim installed successfully"

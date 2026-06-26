@@ -7,6 +7,10 @@ DEST_PATH="$HOME/.scripts"
 
 log_info "Configuring scripts"
 
-link_config "$CONFIG_DIR/tmux-sessionizer" "$DEST_PATH/tmux-sessionizer"
+for script in "$CONFIG_DIR"/*; do
+	if [[ -e "$script" ]]; then
+		link_config "$script" "$DEST_PATH/$(basename "$script")"
+	fi
+done
 
 log_success "Scripts configured successfully"

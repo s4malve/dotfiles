@@ -1,7 +1,11 @@
 background = 000000
 background-opacity = 0.9
 confirm-close-surface = false
+font-size = 16
+font-family= "Geist Mono"
 # background = ffff
 
+
 keybind = ctrl+enter=ignore
-keybind = unconsumed:ctrl+a=reload_config
+keybind = ctrl+a=ignore
+keybind = unconsumed:ctrl+|=reload_config
